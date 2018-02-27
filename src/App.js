@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import VisibleOrdersRoot from './orders/containers/ordersRoot';
 import VisibleProductsRoot from "./products/containers/productsRoot";
 import VisibleShopsCategoriesBrandsRoot from "./shopsCategoriesBrands/containers/shopsCategoriesBrands";
-import { Row } from "react-bootstrap";
+import { Nav, NavItem } from "react-bootstrap";
+
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap'
 
 class App extends Component {
   render() {
@@ -13,24 +15,36 @@ class App extends Component {
       <div className="App">
         <Router>
             <div>
-                <Row>
-                    <Link to="/orders">Orders</Link>
-                </Row>
-                <Row>
-                    <Link to="/products">Products</Link>
-                </Row>
-                <Row>
-                    <Link to="/configs">Shops, Categories and Brands</Link>
-                </Row>
-                <Switch>
+            <Nav pullLeft>
+              <IndexLinkContainer to="/" activeClassName="active">
+                <NavItem>Home</NavItem>
+              </IndexLinkContainer>
+              <LinkContainer to="/orders" activeClassName="active">
+                <NavItem>Orders</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/products" activeClassName="active">
+                <NavItem>Products</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/configs" activeClassName="active">
+                <NavItem>Shops, Categories and Brands</NavItem>
+              </LinkContainer>
+            </Nav>
+            <Switch>
                 <Route path="/:id" component={Child} />
-                </Switch>
+                <Route path="/" component={Home} />
+            </Switch>
             </div>
         </Router>
       </div>
     );
   }
 }
+
+const Home = ({ match }) => (
+  <div style={{"marginTop": "20px"}}>
+    <h3>Honey I'm Home!</h3>
+  </div>
+);
 
 const Child = ({ match }) => (
   <div style={{"marginTop": "20px"}}>
