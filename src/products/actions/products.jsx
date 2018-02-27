@@ -1,6 +1,7 @@
 
 import axios from "axios";
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8080/api/v1';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api/v1';
+const X_ACCESS_TOKEN = process.env.REACT_APP_X_ACCESS_TOKEN || 'test';
 
 function receiveProducts(value) {
     return {
@@ -16,7 +17,10 @@ export function getLiveProducts() {
             url: url,
             timeout: 20000,
             method: "get",
-            responseType: "json"
+            responseType: "json",
+            headers: {
+                "X-Access-Token": X_ACCESS_TOKEN
+            }
         })
             .then((response) => {
                 dispatch(receiveProducts(response.data));

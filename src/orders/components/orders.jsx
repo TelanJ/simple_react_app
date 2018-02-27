@@ -23,6 +23,7 @@ class Orders extends React.Component {
                             <th>Product</th>
                             <th>Delivery Address</th>
                             <th>Delivery Date</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,12 +48,12 @@ const VisibleOrder = connect(
 
 const OrdersRow = (props) => (
     <tr key={"orders_row_" + props.i}>
-        {console.log("props.order", props.order)}
         <td>{props.order.reference_number}</td>
         <td>{props.order.employee_id}</td>
         <td>{props.order.products[0].name}</td>
         <td>{props.order.delivery_address}</td>
         <td>{moment(props.order.delivery_date).format("LLL")}</td>
+        <td>{props.order.status}</td>
     </tr>
 )
 
