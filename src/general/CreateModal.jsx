@@ -14,7 +14,8 @@ const GeneralModal = (props) => {
             {props.body}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
+            <Button onClick={props.onHide} className="pull-left">Close</Button>
+            <Button onClick={props.onCreate} className="pull-right btn-success">Create</Button>
           </Modal.Footer>
         </Modal>
       );

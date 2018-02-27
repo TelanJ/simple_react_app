@@ -29,7 +29,7 @@ function brands (value = [], action) {
 
 function brand (brand = {}, action) {
     switch(action.type) {
-    case "CHANGE_ATTR": {
+    case "CHANGE_BRAND_ATTR": {
         let {attr, value} = action;
         let new_brand = brand;
         new_brand[attr] = value;
@@ -40,12 +40,40 @@ function brand (brand = {}, action) {
     }
 }
 
+function shop (shop = {}, action) {
+    switch(action.type) {
+    case "CHANGE_BRAND_ATTR": {
+        let {attr, value} = action;
+        let new_obj = shop;
+        new_obj[attr] = value;
+        return new_obj;
+    }
+    default:
+        return shop;
+    }
+}
+
+function category (category = {}, action) {
+    switch(action.type) {
+    case "CHANGE_BRAND_ATTR": {
+        let {attr, value} = action;
+        let new_obj = category;
+        new_obj[attr] = value;
+        return new_obj;
+    }
+    default:
+        return category;
+    }
+}
+
 
 const ShopsCategoriesBrandsReducer = combineReducers({
     shops,
     categories,
     brands,
-    brand
+    brand,
+    shop,
+    category
 });
 
 export default ShopsCategoriesBrandsReducer;

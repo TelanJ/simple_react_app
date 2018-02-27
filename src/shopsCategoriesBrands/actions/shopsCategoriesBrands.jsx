@@ -24,6 +24,14 @@ function receiveBrands(value) {
     }
 }
 
+function changeAttr(type, attr, value) {
+    return {
+        type,
+        attr,
+        value
+    }
+}
+
 function shopsApiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/shops"
@@ -85,7 +93,9 @@ function brandsApiCall(method, query, data) {
             }
         })
             .then((response) => {
-                dispatch(receiveBrands(response.data));
+                if (response.data !== null) {
+                    dispatch(receiveBrands(response.data));
+                }
             })
             .catch((error) => {
                 alert(error);
@@ -109,4 +119,49 @@ export function getLiveBrands() {
     return (dispatch) => {
         dispatch(brandsApiCall("get", {}, {}));
     };
+}
+
+export function onChangeModel(type, attr, value) {
+    return (dispatch) => {
+        dispatch(changeAttr(type, attr, value));
+    }
+}
+
+export function onCreateBrand() {
+    return (dispatch, getState) => {
+        let name = getState().brand.name;
+        if (name !== "") {
+            let data = {
+                name
+            }
+            dispatch(brandsApiCall("post", {}, data));
+            dispatch(getLiveBrands());
+        }
+    }
+}
+
+export function onCreateShop() {
+    return (dispatch, getState) => {
+        let name = getState().shop.name;
+        if (name !== "") {
+            let data = {
+                name
+            }
+            dispatch(shopsApiCall("post", {}, data));
+            dispatch(getLiveShops());
+        }
+    }
+}
+
+export function onCreateCategory() {
+    return (dispatch, getState) => {
+        let name = getState().category.name;
+        if (name !== "") {
+            let data = {
+                name
+            }
+            dispatch(categoriesApiCall("post", {}, data));
+            dispatch(getLiveCategories());
+        }
+    }
 }
