@@ -3,6 +3,7 @@ import * as OrderActions from "../actions/orders";
 import React from "react";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
+import moment from "moment";
 
 class Orders extends React.Component {
     componentWillMount() {
@@ -46,11 +47,12 @@ const VisibleOrder = connect(
 
 const OrdersRow = (props) => (
     <tr key={"orders_row_" + props.i}>
-        <td>{props.order.refNumber}</td>
-        <td>{props.order.employeeId}</td>
-        <td>{props.order.products[0]}</td>
-        <td>{props.order.deliveryAddress}</td>
-        <td>{props.order.deliveryDate}</td>
+        {console.log("props.order", props.order)}
+        <td>{props.order.reference_number}</td>
+        <td>{props.order.employee_id}</td>
+        <td>{props.order.products[0].name}</td>
+        <td>{props.order.delivery_address}</td>
+        <td>{moment(props.order.delivery_date).format("LLL")}</td>
     </tr>
 )
 
