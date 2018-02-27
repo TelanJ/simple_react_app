@@ -15,6 +15,15 @@ class Orders extends React.Component {
         return (
             <div>
                 <Table>
+                    <thead>
+                        <tr>
+                            <th>Reference #</th>
+                            <th>Employee ID</th>
+                            <th>Product</th>
+                            <th>Delivery Address</th>
+                            <th>Delivery Date</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {ordersBody}
                     </tbody>
@@ -35,14 +44,15 @@ const VisibleOrder = connect(
     OrderActions
 )(Orders);
 
-const OrdersRow = (props) => {
-    return (
-        <tr key={"orders_row_" + props.i}>
-        {console.log("props", props)}
-        <td>TEST</td>
+const OrdersRow = (props) => (
+    <tr key={"orders_row_" + props.i}>
+        <td>{props.order.refNumber}</td>
+        <td>{props.order.employeeId}</td>
+        <td>{props.order.products[0]}</td>
+        <td>{props.order.deliveryAddress}</td>
+        <td>{props.order.deliveryDate}</td>
     </tr>
-    )
-}
+)
 
 
 export default VisibleOrder;
