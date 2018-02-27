@@ -10,13 +10,15 @@ function receiveProducts(value) {
     }
 }
 
-export function getLiveProducts() {
+function apiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/products"
         return axios({
             url: url,
             timeout: 20000,
-            method: "get",
+            method: method,
+            data: data,
+            query: query,
             responseType: "json",
             headers: {
                 "X-Access-Token": X_ACCESS_TOKEN
@@ -29,4 +31,10 @@ export function getLiveProducts() {
                 alert(error);
             });
     };
+}
+
+export function getLiveProducts() {
+    return (dispatch) => {
+        dispatch(apiCall("get", {}, {}))
+    }
 }

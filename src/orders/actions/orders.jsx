@@ -10,7 +10,7 @@ function receiveOrders(value) {
     }
 }
 
-export function getLiveOrders() {
+function apiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/orders"
         return axios({
@@ -28,5 +28,11 @@ export function getLiveOrders() {
             .catch((error) => {
                 console.log(error);
             });
+    };
+}
+
+export function getLiveOrders() {
+    return (dispatch) => {
+        dispatch(apiCall("get", {}, {}));
     };
 }

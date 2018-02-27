@@ -24,14 +24,16 @@ function receiveBrands(value) {
     }
 }
 
-export function getLiveShops() {
+function shopsApiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/shops"
         return axios({
             url: url,
             timeout: 20000,
-            method: "get",
+            method: method,
             responseType: "json",
+            query: query,
+            data: data,
             headers: {
                 "X-Access-Token": X_ACCESS_TOKEN
             }
@@ -45,14 +47,16 @@ export function getLiveShops() {
     };
 }
 
-export function getLiveCategories() {
+function categoriesApiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/categories"
         return axios({
             url: url,
             timeout: 20000,
-            method: "get",
+            method: method,
             responseType: "json",
+            query: query,
+            data: data,
             headers: {
                 "X-Access-Token": X_ACCESS_TOKEN
             }
@@ -66,15 +70,16 @@ export function getLiveCategories() {
     };
 }
 
-
-export function getLiveBrands() {
+function brandsApiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/brands"
         return axios({
             url: url,
             timeout: 20000,
-            method: "get",
+            method: method,
             responseType: "json",
+            query: query,
+            data: data,
             headers: {
                 "X-Access-Token": X_ACCESS_TOKEN
             }
@@ -85,5 +90,24 @@ export function getLiveBrands() {
             .catch((error) => {
                 alert(error);
             });
+    };
+}
+
+export function getLiveShops() {
+    return (dispatch) => {
+        dispatch(shopsApiCall("get", {}, {}));
+    }
+}
+
+export function getLiveCategories() {
+    return (dispatch) => {
+        dispatch(categoriesApiCall("get", {}, {}));
+    };
+}
+
+
+export function getLiveBrands() {
+    return (dispatch) => {
+        dispatch(brandsApiCall("get", {}, {}));
     };
 }
