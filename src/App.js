@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import VisibleOrdersRoot from "./orders/containers/ordersRoot";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import VisibleOrdersRoot from './orders/containers/ordersRoot';
 import VisibleProductsRoot from "./products/containers/productsRoot";
+import { Row } from "react-bootstrap";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
-          <div>
-            <Switch>
-              <Route path="/orders" component={VisibleOrdersRoot} />
-              <Route path="/products" component={VisibleProductsRoot} />
-            </Switch>
-          </div>
-        </BrowserRouter>
+        <Router>
+            <div>
+                <Row>
+                    <Link to="/orders">Orders</Link>
+                </Row>
+                <Row>
+                    <Link to="/products">Products</Link>
+                </Row>
+                <Switch>
+                <Route path="/:id" component={Child} />
+                </Switch>
+            </div>
+        </Router>
       </div>
     );
   }
 }
+
+const Child = ({ match }) => (
+  <div style={{"marginTop": "20px"}}>
+    {match.params.id === "orders" && <VisibleOrdersRoot props={match.params} />}
+    {match.params.id === "products" && <VisibleProductsRoot props={match.params} />}
+  </div>
+);
 
 export default App;
