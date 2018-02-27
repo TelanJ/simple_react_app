@@ -15,24 +15,28 @@ class App extends Component {
       <div className="App">
         <Router>
             <div>
-            <Nav pullLeft>
-              <IndexLinkContainer to="/" activeClassName="active">
-                <NavItem>Home</NavItem>
-              </IndexLinkContainer>
-              <LinkContainer to="/orders" activeClassName="active">
-                <NavItem>Orders</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/products" activeClassName="active">
-                <NavItem>Products</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/configs" activeClassName="active">
-                <NavItem>Shops, Categories and Brands</NavItem>
-              </LinkContainer>
-            </Nav>
-            <Switch>
-                <Route path="/:id" component={Child} />
-                <Route path="/" component={Home} />
-            </Switch>
+              <div className="col-md-2">
+              <Nav pullLeft>
+                <IndexLinkContainer to="/" activeClassName="active">
+                  <NavItem>Home</NavItem>
+                </IndexLinkContainer>
+                <LinkContainer to="/orders" activeClassName="active">
+                  <NavItem>Orders</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/products" activeClassName="active">
+                  <NavItem>Products</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/configs" activeClassName="active">
+                  <NavItem>Shops, Categories and Brands</NavItem>
+                </LinkContainer>
+              </Nav>
+              </div>
+              <div className="col-md-10">
+                <Switch>
+                    <Route path="/:id" component={Child} />
+                    <Route path="/" component={Home} />
+                </Switch>
+              </div>
             </div>
         </Router>
       </div>
