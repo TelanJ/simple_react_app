@@ -40,12 +40,23 @@ function brand (brand = {}, action) {
     }
 }
 
-function shop (shop = {}, action) {
+let shop_default = {
+    name: "",
+    categories: [],
+    city: "",
+    address: "",
+    tel: "",
+    poc: "",
+    memo: []
+}
+
+function shop (shop = shop_default, action) {
     switch(action.type) {
-    case "CHANGE_BRAND_ATTR": {
+    case "CHANGE_SHOP_ATTR": {
         let {attr, value} = action;
         let new_obj = shop;
         new_obj[attr] = value;
+        console.log("shop", attr, value, new_obj)
         return new_obj;
     }
     default:
@@ -55,7 +66,7 @@ function shop (shop = {}, action) {
 
 function category (category = {}, action) {
     switch(action.type) {
-    case "CHANGE_BRAND_ATTR": {
+    case "CHANGE_CATEGORY_ATTR": {
         let {attr, value} = action;
         let new_obj = category;
         new_obj[attr] = value;

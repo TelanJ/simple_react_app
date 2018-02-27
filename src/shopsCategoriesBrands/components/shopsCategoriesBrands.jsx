@@ -7,6 +7,8 @@ import ShopsRow from "./shopsRow";
 import CategoriesRow from "./categoriesRow";
 import BrandsRow from "./brandsRow";
 import CreateModal from "../../general/CreateModal";
+import FormInput from "../../general/FormInput";
+import FormSelect from "../../general/FormSelect";
 
 class ShopsCategoriesBrands extends React.Component {
     constructor() {
@@ -16,6 +18,12 @@ class ShopsCategoriesBrands extends React.Component {
             categories_modal: false,
             shops_modal: false
         }
+    }
+
+    componentWillMount() {
+        this.props.getLiveShops();
+        this.props.getLiveCategories();
+        this.props.getLiveBrands();
     }
 
     _onHideModal() {
@@ -58,13 +66,20 @@ class ShopsCategoriesBrands extends React.Component {
         }
     }
 
-    componentWillMount() {
-        this.props.getLiveShops();
-        this.props.getLiveCategories();
-        this.props.getLiveBrands();
+    _onSelectChange(type, model, e) {
+        var options = e.target.options;
+        var value = [];
+        for (var i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+            value.push(options[i].value);
+            }
+        }
+        this.props.onChangeModel(type, "categories", value);
     }
 
+
     render() {
+        console.log("shops", this.props.shops)
         let shopsRow = this.props.shops.map((shop, i) => <ShopsRow key={"shops_row_" + i} shop={shop} />);
         let categoriesRow = this.props.categories.map((category, i) => <CategoriesRow key={"categories_row_" + i} category={category} />);
         let brandsRow = this.props.brands.map((brand, i) => <BrandsRow key={"brands_row_" + i} brand={brand} />);
@@ -77,13 +92,42 @@ class ShopsCategoriesBrands extends React.Component {
                  />
             </div>
         )
+        let categories_options = this.props.categories.map((category, i) => {
+            return (
+                <option value={category.ID} key={"categories_option_" + i}>{category.name}</option>
+            );
+        })
         let shopsModalBody = (
             <div>
-                <input type="text" 
-                    className="form-control"
+                <FormInput type="text" 
+                    label="Name"
                     onChange={(e) => this.props.onChangeModel("CHANGE_SHOP_ATTR", "name", e.target.value)} 
                 />
+                <FormSelect
+                    label="Categories"
+                    className="form-control"
+                    multiple
+                    options={categories_options}
+                    onChange={(e) => this._onSelectChange("CHANGE_SHOP_ATTR", "categories", e)}
+                />
+                <FormInput type="text" 
+                    label="City"
+                    onChange={(e) => this.props.onChangeModel("CHANGE_SHOP_ATTR", "city", e.target.value)} 
+                />
+                <FormInput type="text" 
+                    label="Address"
+                    onChange={(e) => this.props.onChangeModel("CHANGE_SHOP_ATTR", "address", e.target.value)} 
+                />
+                <FormInput type="text" 
+                    label="Contact Number"
+                    onChange={(e) => this.props.onChangeModel("CHANGE_SHOP_ATTR", "tel", e.target.value)} 
+                />
+                <FormInput type="text" 
+                    label="Person of Contact"
+                    onChange={(e) => this.props.onChangeModel("CHANGE_SHOP_ATTR", "poc", e.target.value)} 
+                />
             </div>
+            
         )
         let categoryModalBody = (
             <div>
@@ -142,7 +186,7 @@ class ShopsCategoriesBrands extends React.Component {
                     onHide={() => this._onHideModal()} 
                     onCreate={() => this._onCreateModal("shop")}
                     body={shopsModalBody} 
-                    title={"Shops"} />
+                    title={"Create Shop"} />
                 <CreateModal 
                     show={this.state.categories_modal} 
                     onHide={() => this._onHideModal()} 

@@ -142,11 +142,9 @@ export function onCreateBrand() {
 
 export function onCreateShop() {
     return (dispatch, getState) => {
-        let name = getState().shop.name;
+        let { name } = getState().shop;
         if (name !== "") {
-            let data = {
-                name
-            }
+            let data = getState().shop;
             dispatch(shopsApiCall("post", {}, data));
             dispatch(getLiveShops());
         }
@@ -155,7 +153,7 @@ export function onCreateShop() {
 
 export function onCreateCategory() {
     return (dispatch, getState) => {
-        let name = getState().category.name;
+        let {name} = getState().category;
         if (name !== "") {
             let data = {
                 name
