@@ -105,7 +105,6 @@ export function getLiveCategories() {
     };
 }
 
-
 export function getLiveBrands() {
     return (dispatch) => {
         dispatch(brandsApiCall("get", {}, {}));

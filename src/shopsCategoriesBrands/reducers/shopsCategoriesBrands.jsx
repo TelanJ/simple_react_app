@@ -27,11 +27,25 @@ function brands (value = [], action) {
     }
 }
 
+function brand (brand = {}, action) {
+    switch(action.type) {
+    case "CHANGE_ATTR": {
+        let {attr, value} = action;
+        let new_brand = brand;
+        new_brand[attr] = value;
+        return new_brand;
+    }
+    default:
+        return brand;
+    }
+}
+
 
 const ShopsCategoriesBrandsReducer = combineReducers({
     shops,
     categories,
-    brands
+    brands,
+    brand
 });
 
 export default ShopsCategoriesBrandsReducer;
