@@ -1,29 +1,29 @@
 // import PropTypes from 'prop-types'
-import * as OrderActions from "../actions/orders";
+import * as ProductsActions from "../actions/products";
 import React from "react";
 import { connect } from "react-redux";
 // import {Row, Col, Button, Navbar, MenuItem, Nav, NavItem, NavDropdown} from "react-bootstrap";
 
-class Orders extends React.Component {
+class Products extends React.Component {
     render() {
         return (
             <div>
-                Orders Page
+                Products Page
             </div>
         );
     }
 }
 
-Orders.propTypes = {
+Products.propTypes = {
 };
 
 function mapStateToProps(state) {
     return state;
 }
 
-const VisibleOrder = connect(
+const VisibleProducts = connect(
     mapStateToProps,
-    OrderActions
-)(Orders);
+    ProductsActions
+)(Products);
 
-export default VisibleOrder;
+export default VisibleProducts;
