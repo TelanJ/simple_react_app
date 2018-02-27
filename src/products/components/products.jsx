@@ -50,7 +50,6 @@ const ProductsCategoryRow = ({product}) => {
 }
 
 const ProductsRow = ({product}) => {
-    console.log("props", product)
     return (
         <tr>
             <td>{product.name}</td>

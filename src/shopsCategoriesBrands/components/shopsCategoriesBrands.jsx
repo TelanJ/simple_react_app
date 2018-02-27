@@ -17,27 +17,27 @@ class ShopsCategoriesBrands extends React.Component {
         let brandsRow = this.props.brands.map((brand, i) => <BrandsRow key={"brands_row_" + i} brand={brand} />)
         return (
             <div>
-                <Col md={4}>
-                    <h5>Shops</h5>
-                    <Table>
-                        <tbody>
-                            {shopsRow}  
-                        </tbody>
-                    </Table>
-                </Col>
-                <Col md={4}>
-                    <h5>Categories</h5>
+                <Col md={3}>
+                    <h4>Categories</h4>
                     <Table>
                         <tbody>
                             {categoriesRow}
                         </tbody>
                     </Table>
                 </Col>
-                <Col md={4}>
-                    <h5>Brands</h5>
+                <Col md={3}>
+                    <h4>Brands</h4>
                     <Table>
                         <tbody>
                             {brandsRow}
+                        </tbody>
+                    </Table>
+                </Col>
+                <Col md={6}>
+                    <h4>Shops</h4>
+                    <Table>
+                        <tbody>
+                            {shopsRow}  
                         </tbody>
                     </Table>
                 </Col>
@@ -60,21 +60,20 @@ const VisibleShopsCategoriesBrands = connect(
 
 const ShopsRow = (props) => (
     <tr>
-        {console.log("props", props)}
         <td>{props.shop.name}</td>
+        <td>{props.shop.poc}</td>
+        <td>{props.shop.tel}</td>
     </tr>
 )
 
 const CategoriesRow = (props) => (
     <tr>
-        {console.log("props", props)}
         <td>{props.category.name}</td>
     </tr>
 )
 
 const BrandsRow = (props) => (
     <tr>
-        {console.log("props", props)}
         <td>{props.brand.name}</td>
     </tr>
 )
