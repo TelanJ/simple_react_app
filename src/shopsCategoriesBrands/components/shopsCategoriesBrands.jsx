@@ -74,7 +74,7 @@ class ShopsCategoriesBrands extends React.Component {
             value.push(options[i].value);
             }
         }
-        this.props.onChangeModel(type, "categories", value);
+        this.props.onChangeModel(type, model, value);
     }
 
 
@@ -95,6 +95,11 @@ class ShopsCategoriesBrands extends React.Component {
         let categories_options = this.props.categories.map((category, i) => {
             return (
                 <option value={category.ID} key={"categories_option_" + i}>{category.name}</option>
+            );
+        })
+        let brands_options = this.props.brands.map((brand, i) => {
+            return (
+                <option value={brand.ID} key={"brands_option_" + i}>{brand.name}</option>
             );
         })
         let shopsModalBody = (
@@ -131,9 +136,16 @@ class ShopsCategoriesBrands extends React.Component {
         )
         let categoryModalBody = (
             <div>
-                <input type="text" 
-                    className="form-control"
+                <FormInput type="text" 
+                    label="Name"
                     onChange={(e) => this.props.onChangeModel("CHANGE_CATEGORY_ATTR", "name", e.target.value)} 
+                />
+                <FormSelect
+                    label="Brands"
+                    className="form-control"
+                    multiple
+                    options={brands_options}
+                    onChange={(e) => this._onSelectChange("CHANGE_CATEGORY_ATTR", "brands", e)}
                 />
             </div>
         )

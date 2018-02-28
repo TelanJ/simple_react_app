@@ -56,7 +56,6 @@ function shop (shop = shop_default, action) {
         let {attr, value} = action;
         let new_obj = shop;
         new_obj[attr] = value;
-        console.log("shop", attr, value, new_obj)
         return new_obj;
     }
     default:

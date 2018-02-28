@@ -47,7 +47,9 @@ function shopsApiCall(method, query, data) {
             }
         })
             .then((response) => {
-                dispatch(receiveShops(response.data));
+                if (response.data !== null) {
+                    dispatch(receiveShops(response.data));
+                }
             })
             .catch((error) => {
                 alert(error);
@@ -70,7 +72,9 @@ function categoriesApiCall(method, query, data) {
             }
         })
             .then((response) => {
-                dispatch(receiveCategories(response.data));
+                if (response.data !== null) {
+                    dispatch(receiveCategories(response.data));
+                }
             })
             .catch((error) => {
                 alert(error);
