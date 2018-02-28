@@ -1,6 +1,5 @@
 
 import axios from "axios";
-console.log("env", process.env);
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api/v1';
 const X_ACCESS_TOKEN = process.env.REACT_APP_X_ACCESS_TOKEN || 'test';
 
@@ -11,7 +10,7 @@ function receiveOrders(value) {
     }
 }
 
-export function getLiveOrders() {
+function apiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/orders"
         return axios({
@@ -29,5 +28,11 @@ export function getLiveOrders() {
             .catch((error) => {
                 console.log(error);
             });
+    };
+}
+
+export function getLiveOrders() {
+    return (dispatch) => {
+        dispatch(apiCall("get", {}, {}));
     };
 }

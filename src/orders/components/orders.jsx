@@ -3,6 +3,7 @@ import * as OrderActions from "../actions/orders";
 import React from "react";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
+import moment from "moment";
 
 class Orders extends React.Component {
     componentWillMount() {
@@ -15,6 +16,16 @@ class Orders extends React.Component {
         return (
             <div>
                 <Table>
+                    <thead>
+                        <tr>
+                            <th>Reference #</th>
+                            <th>Employee ID</th>
+                            <th>Product</th>
+                            <th>Delivery Address</th>
+                            <th>Delivery Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {ordersBody}
                     </tbody>
@@ -35,14 +46,16 @@ const VisibleOrder = connect(
     OrderActions
 )(Orders);
 
-const OrdersRow = (props) => {
-    return (
-        <tr key={"orders_row_" + props.i}>
-        {console.log("props", props)}
-        <td>TEST</td>
+const OrdersRow = (props) => (
+    <tr key={"orders_row_" + props.i}>
+        <td>{props.order.reference_number}</td>
+        <td>{props.order.employee_id}</td>
+        <td>{props.order.products[0].name}</td>
+        <td>{props.order.delivery_address}</td>
+        <td>{moment(props.order.delivery_date).format("LLL")}</td>
+        <td>{props.order.status}</td>
     </tr>
-    )
-}
+)
 
 
 export default VisibleOrder;
