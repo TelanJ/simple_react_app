@@ -10,6 +10,13 @@ function receiveProducts(value) {
     }
 }
 
+function recvFromApi(type, value) {
+    return {
+        type,
+        value
+    }
+}
+
 function apiCall(method, query, data) {
     return (dispatch) => {
         let url = API_BASE_URL + "/products"
@@ -25,7 +32,9 @@ function apiCall(method, query, data) {
             }
         })
             .then((response) => {
-                dispatch(receiveProducts(response.data));
+                if (response.data !== null) {
+                    dispatch(receiveProducts(response.data));
+                }
             })
             .catch((error) => {
                 alert(error);
@@ -36,5 +45,41 @@ function apiCall(method, query, data) {
 export function getLiveProducts() {
     return (dispatch) => {
         dispatch(apiCall("get", {}, {}))
+    }
+}
+
+export function onChangeAttr(type, attr, value) {
+    return {
+        type,
+        attr,
+        value
+    }
+}
+
+export function FetchFromApi(type, path) {
+    return (dispatch) => {
+        let url = `${API_BASE_URL}/${path}`
+        return axios({
+            url: url,
+            timeout: 20000,
+            method: "get",
+            responseType: "json",
+            headers: {
+                "X-Access-Token": X_ACCESS_TOKEN
+            }
+        })
+            .then((response) => {
+                dispatch(recvFromApi(type, response.data));
+            })
+            .catch((error) => {
+                alert(error);
+            });
+    };
+}
+
+export function onCreateProduct() {
+    return (dispatch, getState) => {
+        dispatch(apiCall("post", {}, getState().product));
+        dispatch(getLiveProducts());
     }
 }
