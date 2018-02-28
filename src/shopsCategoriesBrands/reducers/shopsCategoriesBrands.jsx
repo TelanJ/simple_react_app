@@ -27,7 +27,7 @@ function brands (value = [], action) {
     }
 }
 
-function brand (brand = {}, action) {
+function brand (brand = { name: "" }, action) {
     switch(action.type) {
     case "CHANGE_BRAND_ATTR": {
         let {attr, value} = action;
@@ -63,7 +63,14 @@ function shop (shop = shop_default, action) {
     }
 }
 
-function category (category = {}, action) {
+let category_default = {
+    name: "",
+    brands: [],
+    specFilter: [],
+    image: ""
+}
+
+function category (category = category_default, action) {
     switch(action.type) {
     case "CHANGE_CATEGORY_ATTR": {
         let {attr, value} = action;

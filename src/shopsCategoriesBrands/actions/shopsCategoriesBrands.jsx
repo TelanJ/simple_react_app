@@ -157,11 +157,9 @@ export function onCreateShop() {
 
 export function onCreateCategory() {
     return (dispatch, getState) => {
-        let {name} = getState().category;
-        if (name !== "") {
-            let data = {
-                name
-            }
+        let {name, brands} = getState().category;
+        if (name !== "" && brands.length > 0) {
+            let data = getState().category
             dispatch(categoriesApiCall("post", {}, data));
             dispatch(getLiveCategories());
         }
